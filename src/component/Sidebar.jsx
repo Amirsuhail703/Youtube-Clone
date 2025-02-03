@@ -97,7 +97,7 @@ function Sidebar() {
   return (
     <>
     <div className={`${mobileShow?"fixed top-0 bottom-0 left-0 transition-all duration-300 bg-white z-40 h-screen w-[35%] sm:w-[35%] "
-      :"hidden h-[calc(100vh-3.6rem)] w-[22%]"} xl: static xl:block px-2 overflow-y-scroll overflow-x-hidden`}>
+      :"hidden h-[calc(100vh-3.6rem)] w-[35%]"} xl: static xl:block px-2 overflow-y-scroll overflow-x-hidden`}>
       <div className='items-center space-y-3'>
         { sidebarItems.map((group)=>(  
               <div key={group.groupName} className='mt-1'>
