@@ -5,6 +5,8 @@ import { CiSearch } from "react-icons/ci";
 import { IoMdMic } from "react-icons/io";
 import { CgMathPlus } from "react-icons/cg";
 import { HiOutlineBell } from "react-icons/hi";
+import { IoIosSearch } from "react-icons/io";
+import { IoArrowBack } from "react-icons/io5";
 import logo from '../../public/logo.png';
 import profile from '../../public/profile.jpeg'
 import { useNavigate } from 'react-router-dom';
@@ -12,11 +14,12 @@ import { useUtils } from '../context/UtilsContext';
 
 function Navbar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const {isSidebar, setIsSideBar, mobileShow, setMobileShow} = useUtils();
+  const { isSidebar, setIsSideBar, mobileShow, setMobileShow } = useUtils();
+  const [searchbar, setSearchbar] = useState(false);
 
-  useEffect(()=>{
-    console.log({isSidebar,mobileShow});
-  },[isSidebar])
+  useEffect(() => {
+    console.log({ isSidebar, mobileShow });
+  }, [isSidebar])
 
   const navigate = useNavigate()
 
@@ -28,11 +31,30 @@ function Navbar() {
   }
 
   const handleSideBar = () => {
-    if(window.innerWidth <= 1280){
+    if (window.innerWidth <= 1280) {
       setIsSideBar(!isSidebar);
       setMobileShow(!mobileShow);
     }
     setIsSideBar(!isSidebar);
+  }
+
+  if (searchbar) {
+    return (
+    <div className='flex fixed z-10 bg-white top-0 w-[100%] justify-between px-6 py-2 items-center'>
+      <IoArrowBack size={20} onClick={(e)=>setSearchbar(!searchbar)} className='cursor-pointer'/>
+      <div className=' flex flex-grow items-center mx-4'>
+        <div className='w-[100%] px-4 py-2 border border-gray-400 rounded-l-full'>
+          <input type="text" placeholder='Search' className='outline-none'
+            onChange={(e) => setSearchQuery(e.target.value)} onKeyUp={searchQueryHandler} value={searchQuery} />
+        </div>
+        <button className='px-5 py-2 mr-4 bg-gray-200 border border-gray-400 rounded-r-full'
+          onClick={() => searchQueryHandler("searchButton")}>
+          <CiSearch className='text-2xl cursor-pointer' />
+        </button>
+      </div>
+        <IoMdMic size={"42px"} className='mr-4 bg-gray-200  rounded-full p-2 hover:bg-gray-300 duration-200' />
+    </div>
+    )
   }
 
   return (
@@ -40,10 +62,10 @@ function Navbar() {
 
       <div className='  flex items-center space-x-4'>
         <AiOutlineMenu className='text-xl cursor-pointer' onClick={handleSideBar} />
-        <img src={logo}  className='w-28 cursor-pointer' />
+        <img src={logo} className='w-28 cursor-pointer' />
       </div>
 
-      <div className=' ml-28 flex items-center w-[45%]'>
+      <div className=' hidden md:flex ml-28  items-center w-[45%]'>
         <div className='w-[100%] px-4 py-2 border border-gray-400 rounded-l-full'>
           <input type="text" placeholder='Search' className='outline-none'
             onChange={(e) => setSearchQuery(e.target.value)} onKeyUp={searchQueryHandler} value={searchQuery} />
@@ -52,10 +74,11 @@ function Navbar() {
           onClick={() => searchQueryHandler("searchButton")}>
           <CiSearch className='text-2xl' />
         </button>
-        <IoMdMic size={"42px"} className='mr-4 bg-gray-200  rounded-full p-2 hover:bg-gray-300 duration-200' />
+        <IoMdMic size={"42px"} className=' mr-4 bg-gray-200  rounded-full p-2 hover:bg-gray-300 duration-200' />
       </div>
 
       <div className='  flex space-x-3 items-center'>
+        <IoIosSearch className='xl:hidden text-2xl cursor-pointer' onClick={() => setSearchbar(!searchbar)} />
         <div className='cursor-pointer flex py-2   items-center w-28 justify-evenly font-semibold border rounded-full bg-gray-200 hover:bg-gray-300 duration-200 '>
           <CgMathPlus className='text-2xl' /> Create
         </div>

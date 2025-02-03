@@ -8,7 +8,7 @@ function SearchCard({ video }) {
     console.log(video)
     return (
         <div>
-            <Link to={`/video/${video?.videoId}`}>
+            <Link to={`/video/${video?.videoId}`} >
                 <div className='flex flex-col md:flex-row mb-6 md:mb-3 md:p-4'>
                     {/* thumbnails & time */}
                     <div className='relative flex h-48 w-48 md:w-80'>

@@ -19,15 +19,15 @@ export default function Search() {
     })
   }
   return (
-    <div className=''>
+    <div >
       <div className=' mt-14 flex flex-row h-[calc(100%-60px)] '>
         <Sidebar />
-        <div className='grow h-[calc(100vh-3.90rem)] overflow-y-scroll overflow-x-hidden'>
-          <div className=' grid grid-col-1 gap-2 pl-2 pt-2'>
+        <div className='grow h-[calc(100vh-3.40rem)] overflow-y-scroll overflow-x-hidden'>
+          <div className=' grid grid-col-1 gap-2 pl-2 pt-2 '>
             {
               result?.map((item, indx) => {
                 if (item?.type !== "video") return false;
-                return <SearchCard key={indx} video={item?.video} />
+                return <SearchCard key={indx} video={item?.video}/>
               })
             }
           </div>
